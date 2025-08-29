@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Galerie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/sheet.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="brand">Galerie</h1>
+
+      <input id="nav-toggle" type="checkbox" class="nav-toggle" aria-hidden="true">
+      <label for="nav-toggle" class="burger" aria-label="Menu" role="button" tabindex="0"><span></span></label>
+
+      <nav aria-label="Navigation principale">
+        <ul class="menu">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="cvjour7.html">CV</a></li>
+          <li><a href="projet.html">Projets</a></li>
+          <li><a href="form.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main">
+    <article class="content">
+      <section class="cv-block" id="gallerie">
+        <div class="rule"></div>
+        <h2><span class="hbar"></span>Gallerie</h2>
+
+        <div class="gallery">
+          <figure class="gallery-card">
+            <img src="img/cyber.jpg" alt="Projet cybersécurité" loading="lazy" />
+            <figcaption>Cybersécurité</figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <img src="img/devweb.jpg" alt="Projet développement web" loading="lazy" />
+            <figcaption>Développement Web</figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <img src="img/frontback.jpg" alt="Projet front-end / back-end" loading="lazy" />
+            <figcaption>Front &amp; Back</figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <img src="img/iso.jpg" alt="ISO 27001" loading="lazy" />
+            <figcaption>ISO 27001</figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <img src="img/fw.jpg" alt="Firewalling" loading="lazy" />
+            <figcaption>Firewalling</figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <img src="img/osint.jpg" alt="OSINT" loading="lazy" />
+            <figcaption>Osint</figcaption>
+          </figure>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" aria-hidden="true" role="dialog" aria-label="Agrandissement de l'image">
+    <div class="lightbox-content">
+      <button class="lightbox-close" type="button" aria-label="Fermer la popup">Fermer</button>
+      <img src="" alt="" />
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const lightbox = document.querySelector('.lightbox');
+      const imgLarge = lightbox.querySelector('img');
+      const btnClose = lightbox.querySelector('.lightbox-close');
+
+      document.querySelectorAll('.gallery-card img').forEach(img => {
+        img.addEventListener('click', () => {
+          imgLarge.src = img.currentSrc || img.src;
+          imgLarge.alt = img.alt || '';
+          lightbox.classList.add('open');
+          btnClose.focus();
+        });
+      });
+
+      const close = () => { lightbox.classList.remove('open'); imgLarge.src = ''; imgLarge.alt = ''; };
+      btnClose.addEventListener('click', close);
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    });
+  </script>
+
+  <footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="footer-copy">© 2025 - Yannick DOIRISSE</p>
+    <p class="footer-link"><a href="form.html">En savoir plus</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/sheet.css" />
+  <style>
+    /* Styles légers pour le formulaire, compatibles avec sheet.css */
+    .contact-wrap{max-width:760px;margin:24px auto}
+    form.contact{background:#fff;border:1px solid #eee;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.05);padding:20px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .form-grid .full{grid-column:1/-1}
+    .form-field label{display:block;font-weight:600;margin-bottom:6px}
+    .form-field input,.form-field textarea, .form-field select{
+      width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:10px;background:#fafafa
+    }
+    .form-field textarea{min-height:160px;resize:vertical}
+    .actions{display:flex;gap:12px;align-items:center;margin-top:8px}
+    .btn{
+      display:inline-block;border:0;padding:12px 18px;border-radius:12px;
+      background:var(--brand-bg);color:var(--brand-fg);cursor:pointer;box-shadow:var(--shadow)
+    }
+    .btn:hover,.btn:focus-visible{opacity:.9;outline:none}
+    .notice{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;font-weight:600}
+    .notice.success{background:#e7f6eb;color:#176b37;border:1px solid #b6e2c4}
+    .notice.error{background:#fdecea;color:#b3261e;border:1px solid #f5c2c7}
+    .captcha-wrap{display:flex;align-items:center;gap:12px}
+    .captcha-q{font-weight:700;white-space:nowrap}
+    /* honeypot (anti-bot) */
+    .hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    @media (max-width:768px){ .form-grid{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="brand">Contact</h1>
+
+      <input id="nav-toggle" type="checkbox" class="nav-toggle" aria-hidden="true">
+      <label for="nav-toggle" class="burger" aria-label="Menu" role="button" tabindex="0"><span></span></label>
+
+      <nav aria-label="Navigation principale">
+        <ul class="menu">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="cvjour7.html">CV</a></li>
+          <li><a href="projet.html">Projets</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main">
+    <div class="contact-wrap">
+      <section class="cv-block">
+        <div class="rule"></div>
+        <h2><span class="hbar"></span>Nous contacter</h2>
+      </section>
+
+      <!--
+        Envoi via FormSubmit -> email : yannick.doirisse@formadys.tech
+        - _next redirige vers la même page avec ?sent=1 (fallback sans JS)
+        - _subject personnalise l’objet
+        - champ honeypot "website" pour les bots
+      -->
+      <form
+        class="contact"
+        id="contactForm"
+        action="https://formsubmit.co/yannick.doirisse@formadys.tech"
+        method="POST"
+        novalidate
+      >
+        <!-- Fallback redirection (si JS désactivé) -->
+        <input type="hidden" name="_next" value="form.html?sent=1" />
+        <input type="hidden" name="_subject" value="Nouveau message depuis le site Formadys" />
+        <!-- Désactive le captcha FormSubmit (on gère le nôtre) -->
+        <input type="hidden" name="_captcha" value="false" />
+
+        <!-- Honeypot -->
+        <div class="hp">
+          <label for="website">Ne pas remplir ce champ</label>
+          <input type="text" id="website" name="website" autocomplete="off" tabindex="-1" />
+        </div>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="name">Nom</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          <div class="form-field full">
+            <label for="subject">Sujet</label>
+            <input id="subject" name="subject" type="text" required />
+          </div>
+
+          <div class="form-field full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <!-- CAPTCHA légère (math) -->
+          <div class="form-field">
+            <label for="captchaAnswer">Vérification humaine</label>
+            <div class="captcha-wrap">
+              <span class="captcha-q" id="captchaQuestion">3 + 4 = ?</span>
+              <input id="captchaAnswer" name="captchaAnswer" type="number" inputmode="numeric" required aria-describedby="captchaHelp" />
+            </div>
+            <small id="captchaHelp">Veuillez résoudre l’opération pour prouver que vous êtes humain.</small>
+            <input type="hidden" id="captchaExpected" value="" />
+          </div>
+
+          <div class="form-field">
+            <label>
+              <input id="consent" type="checkbox" required />
+              J’accepte que mes informations soient utilisées pour être recontacté.
+            </label>
+          </div>
+
+          <div class="form-field full">
+            <div class="actions">
+              <button class="btn" type="submit" id="sendBtn">Envoyer</button>
+              <span class="notice success" id="okMsg" role="status" aria-live="polite">Votre demande a bien été prise en compte.</span>
+              <span class="notice error" id="errMsg" role="alert">Une erreur est survenue. Merci de réessayer.</span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">© 2025 - Yannick DOIRISSE</p>
+      <p class="footer-link"><a href="form.html">En savoir plus</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const $ = (s, p=document) => p.querySelector(s);
+      const form = $('#contactForm');
+      const ok = $('#okMsg');
+      const err = $('#errMsg');
+      const btn = $('#sendBtn');
+      const hp = $('#website');
+
+      // --- Génère une CAPTCHA simple (addition 2..9) ---
+      const q = $('#captchaQuestion');
+      const expected = $('#captchaExpected');
+      function newCaptcha(){
+        const a = Math.floor(Math.random()*8)+2; // 2..9
+        const b = Math.floor(Math.random()*8)+2; // 2..9
+        q.textContent = a + ' + ' + b + ' = ?';
+        expected.value = String(a + b);
+        $('#captchaAnswer').value = '';
+      }
+      newCaptcha();
+
+      // --- Affiche un message de succès 4s ---
+      function flashSuccess(){
+        ok.style.display = 'inline-block';
+        setTimeout(()=>{ ok.style.display = 'none'; }, 4000);
+      }
+      function showError(msg){
+        if (msg) err.textContent = msg;
+        err.style.display = 'inline-block';
+        setTimeout(()=>{ err.style.display = 'none'; }, 4000);
+      }
+
+      // --- Si redirection fallback (?sent=1), montrer le message ---
+      if (new URLSearchParams(location.search).get('sent') === '1') {
+        flashSuccess();
+        // Nettoie le paramètre d’URL sans recharger
+        const url = new URL(location.href);
+        url.searchParams.delete('sent');
+        history.replaceState({}, '', url);
+      }
+
+      // --- Validation & envoi ---
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Honeypot: si rempli -> stop
+        if (hp.value.trim() !== '') { return; }
+
+        // CAPTCHA
+        const exp = expected.value.trim();
+        const val = String(($('#captchaAnswer').value || '').trim());
+        if (val !== exp) {
+          showError('CAPTCHA incorrect. Merci de réessayer.');
+          newCaptcha();
+          return;
+        }
+
+        // HTML5 validity (required, email, checkbox, etc.)
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        // Envoi via POST (no-cors) vers FormSubmit
+        btn.disabled = true;
+        err.style.display = 'none';
+        ok.style.display = 'none';
+
+        try {
+          const fd = new FormData(form);
+          // Ajoute un marquage côté message
+          fd.append('source', 'formadys-site');
+
+          await fetch(form.action, {
+            method: 'POST',
+            mode: 'no-cors', // autorise l’envoi sans bloquer par CORS
+            body: fd
+          });
+
+          // On considère l’envoi effectué (FormSubmit traite côté serveur)
+          form.reset();
+          newCaptcha();
+          flashSuccess();
+        } catch (e2) {
+          showError('Impossible d’envoyer le message pour le moment.');
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
