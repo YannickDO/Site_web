@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mon CV Web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/sheet.css" />
+</head>
+<body class="page-cv">
+
+  <!-- Header fixe + hamburger -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="brand">CV</h1>
+
+      <input id="nav-toggle" type="checkbox" class="nav-toggle" aria-hidden="true">
+      <label for="nav-toggle" class="burger" aria-label="Menu" role="button" tabindex="0"><span></span></label>
+
+      <nav aria-label="Navigation principale">
+        <ul class="menu">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="projet.html">Projets</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
+          <li><a href="form.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 2 colonnes (gauche : infos / droite : contenu) -->
+  <main class="container main cv-layout">
+    <aside class="sidebar">
+      <div class="avatar">
+        <img src="img/photocv.jpg" alt="Photo de profil" />
+      </div>
+      <div class="id">
+        <div class="id-line"><strong>DOIRISSE</strong></div>
+        <div class="id-line">Yannick</div>
+      </div>
+    </aside>
+
+    <article class="content">
+      <section class="cv-block" id="intro">
+        <div class="rule"></div>
+        <h2><span class="hbar"></span>Introduction</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quisque non ligula vel est iaculis bibendum. Integer congue, arcu id gravida tincidunt, purus lacus viverra lorem, vitae suscipit lectus nisl vitae arcu. Duis porta, nibh sed rutrum dignissim, mi neque porta risus, vitae tincidunt arcu mauris in purus. Donec posuere, sapien ac consequat venenatis, sem urna tincidunt tortor, sit amet rutrum lacus leo nec sapien. Suspendisse potenti. Cras non augue sodales, volutpat urna non, tempor ipsum. In hac habitasse platea dictumst.</p>
+        <p>Vivamus a eleifend lectus. Proin dapibus, velit a tincidunt vehicula, dui risus sagittis metus, at iaculis ipsum tortor ac sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla accumsan ornare ligula, vitae tincidunt magna rhoncus ac. Mauris auctor, nisl id blandit imperdiet, lacus nibh iaculis lacus, sed ultricies nulla nisl at lectus. Nam luctus gravida purus in accumsan. Integer a massa nec neque aliquam lacinia. Sed sit amet justo non massa pretium pulvinar. Sed a diam pharetra, facilisis sapien a, gravida mi.</p>
+      </section>
+
+      <section class="cv-block" id="skills">
+        <div class="rule"></div>
+        <h2><span class="hbar"></span>Compétences</h2>
+        <ul class="cv-list">
+          <li>Administration systèmes</li>
+          <li>Administration réseaux</li>
+          <li>DevOps</li>
+          <li>Cybersécurité</li>
+        </ul>
+      </section>
+
+      <section class="cv-block" id="xp">
+        <div class="rule"></div>
+        <h2><span class="hbar"></span>Expériences</h2>
+        <ul class="cv-list">
+          <li>Administrateur systèmes</li>
+          <li>D.S.I</li>
+          <li>Formateur</li>
+        </ul>
+      </section>
+
+      <section class="cv-block" id="divers">
+        <div class="rule"></div>
+        <h2><span class="hbar"></span>Divers</h2>
+        <ul class="cv-list">
+          <li>Vol à voile</li>
+          <li>Bénévolat — 2022</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">© 2025 - Yannick DOIRISSE</p>
+      <p class="footer-link"><a href="form.html">En savoir plus</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
